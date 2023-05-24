@@ -1,5 +1,3 @@
-# swedbank-homework
-
 ---
 
 ### This application was created to check/calculate currency rates
@@ -51,6 +49,8 @@
 - JUnit5
 - Mockito
 - Docker
+- Selenium
+- TestNG
 
 ---
 ### Log in information
