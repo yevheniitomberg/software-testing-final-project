@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+</head>
+<body>
+    <div class="container">
+        <div class="form">
+            <table class="table table-hover" style="word-wrap: anywhere">
+                <tr>
+                    <td style="min-width: 100px">Full Name</td>
+                    <td th:text="${user.getFullName()}"></td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td th:text="${user.getEmail()}"></td>
+                </tr>
+                <tr>
+                    <td>Date of Birth</td>
+                    <td th:text="${user.getDateOfBirth()}"></td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td th:text="${user.getAddress()}"></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td th:text="${user.getPassword()}"></td>
+                </tr>
+            </table>
+            <form th:action="@{/account}" method="post">
+                <button type="submit" name="action" th:value="'update'" class="form-control btn btn-primary mgt5px">Edit Information</button>
+            </form>
+            <a  th:href="@{/currency}" class="form-control btn btn-info mgt5px">Currency Exchange Calculator</a>
+            <a sec:authorize="hasRole('ADMIN')" th:href="@{/admin}" class="form-control btn btn-warning mgt5px">Admin panel</a>
+            <a th:href="@{/account/test-report}" class="form-control btn btn-warning mgt5px">Test Report</a>
+            <a th:href="@{/logout}" class="form-control btn btn-danger mgt5px">Log out</a>
+            <form th:action="@{/account}" method="post">
+                <button type="submit" name="action" th:value="'delete_account'" class="form-control btn btn-danger mgt5px">Delete account</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Currency Exchange</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+</head>
+<body>
+    <div class="container">
+        <form class="form" th:action="@{/currency}" method="post">
+            <label for="currencyFromSelect">Calculate from</label>
+            <select class="form-control" name="currencyFromSelect" id="currencyFromSelect">
+                <option th:each="currency : ${currencies}" th:value="${currency.getCode()}" th:text="${currency.getCode()} + ' (' + ${currency.getCountry()} + ')'"></option>
+            </select>
+
+            <label for="currencyToSelect">To</label>
+            <select class="form-control" name="currencyToSelect" id="currencyToSelect">
+                <option th:each="currency : ${currencies}" th:value="${currency.getCode()}" th:text="${currency.getCode()} + ' (' + ${currency.getCountry()} + ')'"></option>
+            </select>
+
+            <div class="form-group">
+                <label for="inputAmount">Amount</label>
+                <input type="number" step="0.01" min="1" max="1000000" onchange="check()" value="1" class="form-control" id="inputAmount" name="amount">
+                <small id="amountHelpInline" class="text-muted">
+                    Amount has to be between 1 and 1000000
+                </small>
+            </div>
+
+            <button type="submit" id="subBtn" class="btn btn-primary">Calculate</button>
+            <a th:href="@{/account}" class="btn btn-primary my-1">Account</a>
+
+            <hr>
+            <div class="alert alert-success" style="text-align: center" th:if="${from} != null" th:text="${amount} + ' (' + ${from} + ') --> (' + ${to} + ') = ' + ${rate}">
+
+            </div>
+        </form>
+        <p>Rate based on EUR</p>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Currency</th>
+                <th scope="col">Rate</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="currency : ${currencies}">
+                <td th:text="${currency.getCode()} + ' (' + ${currency.getCountry()} + ')'"></td>
+                <td th:text="${currency.getRate()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <script th:src="@{/js/inputCheck.js}"></script>
+</body>
+</html>

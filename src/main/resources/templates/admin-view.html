@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+</head>
+<body>
+    <div class="container">
+        <div class="form">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Full Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${customers}">
+                    <td th:text="${user.getFullName()}"></td>
+                    <td th:text="${user.getEmail()}"></td>
+                    <td th:attr="class=${user.isEnabled() ? 'active-user' : 'inactive-user'}"
+                        th:text="${user.isEnabled()} ? 'Active' : 'Deleted'"
+                    ></td>
+                    <td>
+                        <form th:action="@{/admin}" method="post">
+                            <button th:attr="disabled=${user.isAdmin()}" type="submit" name="userId" th:data-active="${user.isEnabled()}" th:data-username="${user.getEmail()}" th:value="${user.getId()}" class="btn btn-primary">Edit</button>
+                        </form>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <a th:href="@{/account}" class="btn btn-primary my-1">Account</a>
+        </div>
+    </div>
+</body>
+</html>

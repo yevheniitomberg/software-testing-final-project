@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.css}">
+</head>
+<body>
+<div class="centrator">
+    <div class="container">
+        <div class="form">
+            <h1 class="form-control btn-danger" style="text-align: center">Something went wrong!</h1>
+            <h2 class="form-control btn-warning" style="text-align: center">Our Engineers are on it</h2>
+            <h2 class="form-control btn-warning" style="text-align: center" th:text="'Status: ' + ${#response.getStatus()}"></h2>
+            <a href="/" type="button" class="btn btn-success form-control">Go Home</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>
